@@ -8,6 +8,7 @@ from getdata.models import Archive
 # Create your views here.
 
 all_id = []
+not_in_search = []
 
 def getfile(request):
     now_dir = os.path.dirname(__file__)
@@ -45,15 +46,18 @@ def getfile(request):
 
             search = requests.get('http://www.tsetmc.com/tsev2/data/search.aspx?skey={}'.format(name))
             search_arr = search.text.split(",")
-            if( name in search_arr):
-                tbl = search_arr.index(name)
+            if(len(str(search_arr)) > 20):
+                if( name in search_arr):
+                    tbl = search_arr.index(name)
 
-            save_shenasname = Archive(Ta1=tbl1,C12Na=shenase_in_loop[0],C5Na=shenase_in_loop[1],
-                NLSh=shenase_in_loop[2],C4Sh=shenase_in_loop[3],NSh=shenase_in_loop[4],NaF=shenase_in_loop[5],
-                Na30F=shenase_in_loop[6],C12Sh=shenase_in_loop[7],B=shenase_in_loop[8],CTa=shenase_in_loop[9],
-                CGI=shenase_in_loop[10],GI=shenase_in_loop[11],CSGI=shenase_in_loop[12],SGI=shenase_in_loop[13],
-                Ta2=search_arr[tbl + 3],Ta3=search_arr[tbl + 4],Ta4=search_arr[tbl + 5])
-            save_shenasname.save()
-        
-            return HttpResponse('name')
+                save_shenasname = Archive(Ta1=tbl1,C12Na=shenase_in_loop[0],C5Na=shenase_in_loop[1],
+                    NLSh=shenase_in_loop[2],C4Sh=shenase_in_loop[3],NSh=shenase_in_loop[4],NaF=shenase_in_loop[5],
+                    Na30F=shenase_in_loop[6],C12Sh=shenase_in_loop[7],B=shenase_in_loop[8],CTa=shenase_in_loop[9],
+                    CGI=shenase_in_loop[10],GI=shenase_in_loop[11],CSGI=shenase_in_loop[12],SGI=shenase_in_loop[13],
+                    Ta2=search_arr[tbl + 3],Ta3=search_arr[tbl + 4],Ta4=search_arr[tbl + 5])
+                save_shenasname.save()
+            else:
+                not_in_search.append({})
+                
+            return HttpResponse(not_in_search)
 
