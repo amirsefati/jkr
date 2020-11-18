@@ -52,7 +52,8 @@ def getfile(request):
                 NLSh=shenase_in_loop[2],C4Sh=shenase_in_loop[3],NSh=shenase_in_loop[4],NaF=shenase_in_loop[5],
                 Na30F=shenase_in_loop[6],C12Sh=shenase_in_loop[7],B=shenase_in_loop[8],CTa=shenase_in_loop[9],
                 CGI=shenase_in_loop[10],GI=shenase_in_loop[11],CSGI=shenase_in_loop[12],SGI=shenase_in_loop[13],
-                Ta2=search_arr[tbl + 1],Ta3=search_arr[tbl + 2],Ta4=search_arr[tbl + 3])
+                Ta2=search_arr[tbl + 3],Ta3=search_arr[tbl + 4],Ta4=search_arr[tbl + 5])
             save_shenasname.save()
         
-    return HttpResponse('ok')
+            return HttpResponse('name')
+
